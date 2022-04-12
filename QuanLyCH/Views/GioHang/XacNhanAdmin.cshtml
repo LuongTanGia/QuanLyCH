@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "XacNhanAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="display:flex; align-items:center; justify-content:center;  flex-direction:column; height:70vh;">
+
+    <h2>Bạn Không Phải Admin !!</h2>
+    <h3>Bạn Phải Được Cấp Quyền !</h3>
+    <p>
+        @Html.ActionLink("Về trang chú", "Index", "Home")
+    </p>
+</div>

@@ -1,0 +1,178 @@
+﻿@model IEnumerable<QuanLyCH.Models.GioHang>
+@{
+    ViewBag.Title = "Giohang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giỏ Hàng</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div style="display:flex;">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.magiay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.hinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.giagiam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.iSoluong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dThanhtien)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.tengiay)</td>
+                <td> <img src="@item.hinh" width="180" /></td>
+                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.magiay }))
+                {
+                    <td>@String.Format("{0:0,0}", item.giagiam) VNĐ </td>
+                    <td>
+                        @using QuanLyCH.Models
+                        
+                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg" value="@item.iSoluong" style="width:40px; border:none" />
+
+
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
+                    <td>
+                        <a href="@Url.Action("Detail","Giay",new { id =item.magiay } )">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.magiay })
+                    </td>
+                    <td>
+                        <input type="submit" value="Cập Nhật" class="btn btn-success" />
+                    </td>
+
+                }
+            </tr>
+        }
+
+
+
+    </table>
+
+    <div class="card">
+        <h1>Shopping</h1>
+        <hr />
+        <div style="font-weight: bold; text-align: left; color: red;">
+            <div style="   display: flex; justify-content:space-between;">
+                <p colspan="2">Số loại giày:</p>
+                <p style="text-align: right;"> @ViewBag.Tongsoluongsanpham </p>
+            </div>
+            <div style="   display: flex; justify-content:space-between;">
+                <p colspan="3">Số lượng giày:</p> <p> @ViewBag.Tongsoluong</p>
+            </div>
+            
+            <div style="   display:block; justify-content:space-between;">
+
+                @if (ViewBag.TongTien <= 300000)
+                {
+                    <p colspan="4">Tổng tiền:</p>
+                    <p> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                }
+                else
+                {
+                    if (ViewBag.TongTien > 300000 && ViewBag.TongTien <= 1000000)
+                    {
+                        <p colspan="4">Tổng tiền:</p>
+                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                        <p colspan="4">Giam Gia:</p>
+                        <p> @String.Format("{0:0,0}", ViewBag.TienGiam1) vnd </p>
+                        <p>Giam &#8595;30%</p>
+                    }
+                    else
+                    {
+                        <p colspan="4">Tổng tiền:</p>
+                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                        <p colspan="4">Giam Gia:</p>
+                        <p> @String.Format("{0:0,0}", ViewBag.TienGiam2) vnd </p>
+                        <p>Giam &#8595;50%</p>
+
+                    }
+
+                }
+
+
+            </div>
+
+        </div>
+        <hr />
+        <div style="font-weight: bold; text-align: right; color:blue">
+            <div colspan="5">
+                @*                @Html.ActionLink("Xóa Giỏ hàng", "XoaTatCaGiohang")
+                *@                <a class="btn btn-danger" href="@Url.Action("XoaTatCaGiohang", "GioHang")" style="width:50%; margin-right:20px">Xoa Tat Ca </a>
+
+
+            </div>
+        </div>
+        <div style="font-weight: bold; text-align: right; color:yellow">
+            <div colspan="5" style="margin:20px;">
+                @*@Html.ActionLink("Đặt Hàng", "Dathang", "GioHang")*@
+                <a class="btn btn-info" href="@Url.Action("Dathang", "GioHang")" style="width:100%;"> Dat Hang</a>
+            </div>
+
+        </div>
+        <hr />
+        <div class="">
+            <div class="card-body">
+                <p><strong>We accept</strong></p>
+                <img class="me-2" width="45px"
+                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                     alt="Visa" />
+                <img class="me-2" width="45px"
+                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                     alt="American Express" />
+                <img class="me-2" width="45px"
+                     src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                     alt="Mastercard" />
+                <a href="@Url.Action("Payment","momo")">
+                    <img class="me-2" width="45px"
+                         src="https://is4-ssl.mzstatic.com/image/thumb/Purple123/v4/60/19/06/6019065e-3023-2217-ab41-fadff8c2cc4a/AppIcon-0-0-1x_U007emarketing-0-0-0-5-0-0-85-220.png/1024x1024bb.png"
+                         alt="PayPal acceptance mark" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<hr class="colorgraph" />
+<style>
+    .colorgraph {
+        height: 5px;
+        border-top: 0;
+        background: #c4e17f;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+
+    .card {
+        margin-left: 10px;
+        height: 450px;
+        overflow: hidden;
+        width: 400px;
+        border-radius: 12px;
+        padding: 5px;
+    }
+
+    .gradient-custom {
+        /* fallback for old browsers */
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background-color: blue;
+    }
+</style>

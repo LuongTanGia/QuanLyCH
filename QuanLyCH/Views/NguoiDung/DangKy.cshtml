@@ -1,0 +1,612 @@
+﻿@*@model QuanLyCH.Models.KhachHang
+
+    @{
+        ViewBag.Title = "DangKy";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>DangKy</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>KhachHang</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.hoten, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.hoten, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tendangnhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tendangnhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tendangnhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="MatKhauXacNhan">
+                    Mật khẩu xác nhận:
+                </label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line input-validation-error"
+                           data-val="true" data-val-required="Phải nhập mật khẩu xác nhận!"
+                           id="MatKhauXacNhan" name="MatKhauXacNhan" type="password" value="" aria-
+                           describedby="MatKhauXacNhan-error" aria-invalid="true">
+
+                    @ViewData["NhapMKXN"]
+                    @ViewData["MatKhauGiongNhau"]
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.diachi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.diachi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.diachi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.dienthoai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dienthoai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dienthoai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ngaysinh, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ngaysinh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ngaysinh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+*@
+@model QuanLyCH.Models.KhachHang
+
+@{
+    ViewBag.Title = "Dangky";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>KhachHang</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.hoten, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.hoten, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tendangnhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tendangnhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tendangnhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="MatKhauXacNhan">Mật khẩu xác nhận:  </label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line input-validation-error" data-val="true" data-val-required="Phải nhập mật khẩu xác nhận!"
+                           id="MatKhauXacNhan" name="MatKhauXacNhan" type="password" value="" aria describedby="MatKhauXacNhan-error" aria-invalid="true">
+                    @ViewData["NhapMKXN"]
+                    @ViewData["MatKhauGiongNhau"]
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.diachi, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.diachi, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.diachi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.dienthoai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dienthoai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.dienthoai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ngaysinh, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ngaysinh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ngaysinh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form role="form">
+                    <h2>Please Sign Up <small>It's free and always will be.</small></h2>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group ">
+                                @Html.EditorFor(model => model.hoten, new { htmlAttributes = new { @class = "form-control", placeholder = "Ho Ten", id = "username" } })
+                                @ViewData["NhapHoten"]
+
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.ngaysinh, new { htmlAttributes = new { @class = "form-control", placeholder = "Ngay Sinh" } })
+                                @ViewData["nhapNS"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.tendangnhap, new { htmlAttributes = new { @class = "form-control", placeholder = "Ten Dang Nhap", type = "text", id = "Username", name = "tendangnhap", onchange = "UserCheck()" } })
+                        @Html.ValidationMessageFor(model => model.tendangnhap, "", new { @class = "text-danger", id = "Statusss" })
+                        @ViewData["NhapTK"]
+
+                        <script>
+                            function UserCheck() {
+                                $("#Statusss").html("Checking...");
+                                $.post("@Url.Action("CheckUsername","NguoiDung")",
+                                    {
+                                        userdata: $("#Username").val()
+                                    },
+                                    function (data) {
+                                        if (data == 0) {
+                                            $("#Statusss").html('<font color = "Green"> Tài khoản có thể sử dụng.</font>');
+                                            $("#Username").css("border-color", "Green");
+                                        }
+                                        else {
+                                            $("#Statusss").html('<font color = "Red"> Tài khoản tồn tại.</font>');
+                                            $("#Username").css("border-color", "Red");
+
+                                        }
+                                    });
+                            }
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email", type = "text", id = "Emaill" ,name = "email", onchange = "GmailCheck()" } })
+                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger", id = "Statuss" })
+                        @ViewData["nhapEmail"]
+                        <script>
+                            function GmailCheck() {
+                                    $("#Statuss").html("Checking...");
+                                    $.post("@Url.Action("CheckEmail", "NguoiDung")",
+                                        {
+                                            userdata: $("#Emaill").val()
+                                        },
+                                        function (data) {
+                                            if (data == 0) {
+                                                $("#Statuss").html('<font color = "Green"> Email có thể sử dụng.</font>');
+                                                $("#Emaill").css("border-color", "Green");
+                                            }
+                                            else {
+                                                $("#Statuss").html('<font color = "Red"> Email đã có người sử dụng.</font>');
+                                                $("#Emaill").css("border-color", "Red");
+
+                                            }
+                                        });
+                                }
+                        </script>
+                    </div>
+                    <div class="form-group">
+
+                      @Html.EditorFor(model => model.dienthoai, new { htmlAttributes = new { @class = "form-control", placeholder = "Dien Thoai", onchange = "PhoneCheck()", id = "Phones", name = "dienthoai", type = "text" } })
+                        
+                      @Html.ValidationMessageFor(model => model.dienthoai, "", new { @class = "text-danger", id = "Status" })
+                        
+                      @ViewData["nhapDT"]
+                       
+                        <script>
+                            function PhoneCheck()
+                            {
+                                    $("#Status").html("Checking...");
+                                    $.post("@Url.Action("CheckPhone", "NguoiDung")",
+                                        {
+                                            userdata: $("#Phones").val()
+                                        },
+                                        function (data)
+                                        {
+                                            if (data == 0) {
+                                                $("#Status").html('<font color = "Green"> Số điện thoại có thể sử dụng.</font>');
+                                                $("#Phones").css("border-color", "Green");
+                                            }
+                                            else {
+                                                $("#Status").html('<font color = "Red"> Số điện thoại đã có người sử dụng.</font>');
+                                                $("#Phones").css("border-color", "Red");
+
+                                            }
+                                        });
+                             }
+                        </script>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "form-control", Type = "password", placeholder = "Password" } })
+                                @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input class="form-control text-box single-line input-validation-error" data-val="true" data-val-required="Phải nhập mật khẩu xác nhận!"
+                                       id="MatKhauXacNhan" name="MatKhauXacNhan" type="password" value="" aria describedby="MatKhauXacNhan-error" aria-invalid="true" placeholder="Xac Nhan PassWord">
+                                @ViewData["NhapMKXN"]
+                                @ViewData["MatKhauGiongNhau"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-3 col-md-3">
+                            <span class="button-checkbox">
+                                <button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>
+                                <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
+                            </span>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-9">
+                            By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="#" data-toggle="modal" data-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
+                        </div>
+                    </div>
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-8 col-sm-9 col-md-9">
+                                <input type="submit" value="Create" class="btn btn-success" style="width:100%;" />
+                            </div>
+                            <div>
+                                @Html.ActionLink("Back to List", "Index")
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="t_and_c_m" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Terms & Conditions</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, itaque, modi, aliquam nostrum at sapiente consequuntur natus odio reiciendis perferendis rem nisi tempore possimus ipsa porro delectus quidem dolorem ad.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">I Agree</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+}
+<script>
+    $(function () {
+        $('.button-checkbox').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $button = $widget.find('button'),
+                $checkbox = $widget.find('input:checkbox'),
+                color = $button.data('color'),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+            // Event Handlers
+            $button.on('click', function () {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+            });
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $button.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $button.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $button
+                        .removeClass('btn-default')
+                        .addClass('btn-' + color + ' active');
+                }
+                else {
+                    $button
+                        .removeClass('btn-' + color + ' active')
+                        .addClass('btn-default');
+                }
+            }
+
+            // Initialization
+            function init() {
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($button.find('.state-icon').length == 0) {
+                    $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i>');
+                }
+            }
+            init();
+        });
+    });
+
+
+    var username = document.querySelector('#username')
+        var email = document.querySelector('#email')
+        var password = document.querySelector('#password')
+        var confirmpass = document.querySelector('#confirm-password')
+
+        var form = document.querySelector('form')
+
+
+        function showError(input, message) {
+            let parent = input.parentElement;
+            let small = parent.querySelector('small')
+            parent.classList.add('error')
+            small.innerText = message
+        }
+
+        function showSuccess(input, message) {
+            let parent = input.parentElement;
+            let small = parent.querySelector('small')
+            parent.classList.remove('error')
+            small.innerText = ''
+        }
+
+        function CheckEmptyError(listInput) {
+            let isEmptyError = false;
+            listInput.forEach(input => {
+                input.value = input.value.trim()
+                if (input.value == '') {
+                    isEmptyError = true;
+                    showError(input, 'Khong Duoc De trong')
+                } else {
+                    showSuccess(input)
+                }
+            });
+            return isEmptyError
+        }
+
+        function checkEmailError(input) {
+@*            const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+*@
+            input.value = input.value.trim()
+
+            let isEmailError = !regexEmail.test(input.value)
+
+            if (regexEmail.test(input.value)) {
+                showSuccess(input)
+            } else {
+                showError(input, 'Email Invalid')
+            }
+
+            return isEmailError
+        }
+
+        function checklengthError(input, min, max) {
+            input.value = input.value.trim()
+
+            if (input.value.length < min) {
+                showError(input, `Phai Co It Nhat ${min} Ky Tu`)
+                return true;
+            }
+
+            if (input.value.length > max) {
+                showError(input, `Khong Duoc Qua ${max} Ky Tu`)
+                return true;
+            }
+
+            return false;
+        }
+
+        function checkPasswordError(passwordInput, cfpasswordInput) {
+            if (passwordInput.value !== cfpasswordInput.value) {
+
+                showError(cfpasswordInput, 'Mat Khau Khong Trung Khop')
+                return true;
+            }
+            return false;
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault()
+
+            let isEmptyError = CheckEmptyError([username, email, password, confirmpass])
+            let isEmailError = checkEmailError(email)
+            let isusernamelengthError = checklengthError(username, 5, 16)
+            let ispasswordlengthError = checklengthError(password, 2, 16)
+            let ischeckpasswordError = checkPasswordError(password, confirmpass)
+        })
+</script>
+<style>
+    .account h1 {
+        text-align: center;
+        color: #30292f;
+        background: linear-gradient(120deg, #bd11a0, #4b49d1);
+        border-radius: 15px;
+    }
+
+    .account-item {
+        width: 100%;
+        position: relative;
+        margin-top: 40px;
+    }
+
+        .account-item input {
+            width: 100%;
+            height: 30px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #adadad;
+        }
+
+        .account-item span {
+            position: absolute;
+            border-bottom: 2px solid var(--successt-color);
+            top: 28px;
+            left: 0;
+            width: 0%;
+            transition: 0.3s;
+        }
+
+        .account-item input:focus ~ span {
+            width: 100%;
+        }
+
+    .error small {
+        color: var(--error-color);
+    }
+
+    .error input {
+        border-bottom: 2px solid var(--error-color);
+    }
+
+    .btn-submit {
+        width: 100%;
+        height: 40px;
+        border-radius: 25px;
+        outline: none;
+        border: none;
+        /* background: var(--successt-color); */
+        background: linear-gradient(120deg, #7bcdee, #0faae7);
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        margin: 20px 0;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .link {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .link a {
+            color: var(--successt-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+            .link a:hover {
+                text-decoration: underline;
+            }
+
+    .btn-submit:hover {
+        background: #08609a;
+    }
+
+    .web {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

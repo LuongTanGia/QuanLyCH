@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="~/Content/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="container">
+
+            <div class="navbar-header" >
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            @Html.ActionLink("Cửa hàng giày GNDC", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-house"></i></a></li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    @using QuanLyCH.Models
+                    @{
+                        KhachHang kh = (KhachHang)Session["TaiKhoan"];
+                    }
+                    @if (Session["TaiKhoan"] == null)
+
+                    {
+
+                    }
+                    else
+                    {
+                        if (kh.id == 1)
+                        {
+                            <li>@Html.ActionLink("Giày", "ListGiay", "Giay")</li>
+                            <li><a href="#" style="margin-left:-25px;"><i class="fa-solid fa-ellipsis-vertical"></i> </a></li>
+                            <li>@Html.ActionLink("Danh Muc", "Listdanhmuc", "Giay")</li>
+                            <li><a href="#" style="margin-left:-25px;"><i class="fa-solid fa-ellipsis-vertical"></i></a></li>
+
+                        }
+                    }
+                    <li>@Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")</li>
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+
+
+                </ul>
+                <div class="nav navbar-nav navbar-default" style="background:none; margin:15px;">
+                    @Html.Action("miniGiohang", "GioHang")
+                </div>
+                <ul class="nav navbar-nav navbar-collapse ">
+                    <li>
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
+                        {
+                            <div class="form-group form-inline" style="display: flex; align-items: center; justify-content: center; margin:10px; ">
+                                <input type="Text" class="form-control col-md-10" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập tên cần tìm">
+                                <input type="submit" class="btn  btn-primary" value="Tìm Giày" style="margin-left:10px;">
+                            </div>
+
+                        }
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["TaiKhoan"] != null)
+                    {
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                        <li>@Html.Partial("~/Views/GioHang/Ten.cshtml")</li>
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-from-bracket"></i> </a></li>
+                        <li>@Html.ActionLink("Đăng Xuất", "DangXuat", "NguoiDung")</li>
+
+                    }
+                    else
+                    {
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                        <li>@Html.ActionLink("Đăng Ký", "Dangky", "NguoiDung")</li>
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+                        <li>@Html.ActionLink("Đăng Nhập", "DangNhap", "NguoiDung")</li>
+                    }
+                    @*<li>@Html.ActionLink("Dang Ky", "DangKy", "NguoiDung")</li>
+            <li>@Html.ActionLink("Dang Nhap", "DangNhap", "NguoiDung")</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    @*  <div class="center">
+            <ul class="menu">
+                <li>
+                    <a href="">Dienthoai</a>
+                </li>
+                <li>
+                    <a href="">LapTop</a>
+                </li>
+                <li>
+                    <a href="">PhuKien</a>
+                    <ul class="sub-menu">
+                        <li><a href="">menu 2.1</a></li>
+                        <li><a href="">menu 2.2</a></li>
+                        <li>
+                            <a href="">menu 2.3</a>
+                            <ul class="sub-menu2">
+                                <li><a href="">menu 2.2.1</a></li>
+                                <li><a href="">menu 2.2.2</a></li>
+                                <li><a href="">menu 2.2.3</a></li>
+                                <li><a href="">menu 2.2.4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="">menu 2.4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">DongHoThongMinh</a>
+                </li>
+                <li>
+                    <a href="">Pc,MayIn</a>
+                </li>
+                <li>
+                    <a href="">MayCuGiaRe</a>
+                </li>
+                <li>
+                    <a href="">TraGop,TraTruoc</a>
+                    <ul class="sub-menu">
+                        <li><a href="">menu 2.1</a></li>
+                        <li><a href="">menu 2.2</a></li>
+                        <li><a href="">menu 2.3</a></li>
+                        <li><a href="">menu 2.4</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">Sim,TheCao</a>
+                </li>
+            </ul>
+
+        </div>*@
+    
+<div class="container body-content" >
+
+
+    @RenderBody()
+    
+
+
+
+
+    <hr />
+    <!-- Footer -->
+    <footer class="text-center text-white " style="background: #242628; color: white;">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-twitter"></i>
+                </a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-google"></i>
+                </a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+
+                <!-- Github -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-github"></i>
+                </a>
+                <hr class="colorgraph" style="margin-left:-15px; width:100%;">
+
+            </section>
+            <!-- Section: Social media -->
+            <!-- Section: Form -->
+            <section class="">
+                <form action="">
+                    <!--Grid row-->
+                    <!--Grid row-->
+                </form>
+            </section>
+            <!-- Section: Form -->
+            <!-- Section: Text -->
+            <section class="mb-4">
+                <p>
+                   Cảm ơn thầy và các bạn đã bỏ thời gian nghe bài demo của nhóm mình , chân thành cảm ơn !!!
+                </p>
+            </section>
+            <!-- Section: Text -->
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row " style="display:flex;">
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <div style="text-align:left">
+
+                            <h5 class="text-uppercase">Lương Tấn Gia : 1911066587</h5>
+                            <br />
+                            <h5 class="text-uppercase">Hồ Chí Công : 1911065165</h5>
+                            <br />
+                            <h5 class="text-uppercase">Lương Ngọc Đức : 1911066049</h5>
+                            <br />
+                            <h5 class="text-uppercase">Lê Lộc Nguyên : 1911066241</h5>
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+
+
+                    </div>
+                    @Html.Partial("~/Views/Giay/Map.cshtml")
+
+
+
+
+
+
+
+
+                </div>
+                    <!--Grid row-->
+    </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: #8a8888;">
+            © Luong Tan Gia:
+            <a class="text-white" href="https://www.facebook.com/profile.php?id=100010381846255">Luong Tan Gia</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+</div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("upload", required: false)
+
+
+    <style>
+        .colorgraph {
+            height: 5px;
+            border-top: 0;
+            background: #c4e17f;
+            border-radius: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        }
+
+        ul.dropdown-cart {
+            min-width: 250px;
+        }
+
+            ul.dropdown-cart li .item {
+                display: block;
+                padding: 3px 10px;
+                margin: 3px 0;
+            }
+
+                ul.dropdown-cart li .item:hover {
+                    background-color: #f3f3f3;
+                }
+
+                ul.dropdown-cart li .item:after {
+                    visibility: hidden;
+                    display: block;
+                    font-size: 0;
+                    content: " ";
+                    clear: both;
+                    height: 0;
+                }
+
+            ul.dropdown-cart li .item-left {
+                float: left;
+            }
+
+                ul.dropdown-cart li .item-left img,
+                ul.dropdown-cart li .item-left span.item-info {
+                    float: left;
+                }
+
+                ul.dropdown-cart li .item-left span.item-info {
+                    margin-left: 10px;
+                }
+
+                    ul.dropdown-cart li .item-left span.item-info span {
+                        display: block;
+                    }
+
+            ul.dropdown-cart li .item-right {
+                float: right;
+            }
+
+                ul.dropdown-cart li .item-right button {
+                    margin-top: 14px;
+                }
+
+        i {
+            color: white;
+            font-size: 20px;
+        }
+
+            i:hover {
+                color: #ef4242;
+                transform: scale(1.5);
+            }
+
+
+        .center {
+            margin-top: 20px;
+            width: 100%;
+            margin: 6px auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #615f5f;
+        }
+
+        .menu li {
+            width: 100%;
+            position: relative;
+            z-index: 5;
+        }
+
+        .sub-menu {
+            position: absolute;
+            list-style: none;
+            background: #615f5f;
+            /* padding: 15px 0; */
+            width: 200px;
+            display: none;
+            transition: all 2s ease-in-out;
+        }
+
+        .menu li:hover .sub-menu {
+            display: block;
+        }
+
+        .sub-menu li {
+            float: left;
+            text-align: left;
+        }
+
+            .sub-menu li a {
+                border: none;
+                padding: 8px 15px;
+            }
+
+        .sub-menu2 {
+            left: 200px;
+            position: absolute;
+            list-style: none;
+            background: #615f5f;
+            padding: 15px 0;
+            width: 200px;
+            margin-top: -72px;
+            display: none;
+        }
+
+        .sub-menu li:hover .sub-menu2 {
+            display: block;
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+        }
+
+            .menu a {
+                display: block;
+                color: rgb(255, 255, 255);
+                border: 2px solid #f1e8f0;
+                border-radius: 20px;
+                /* margin: 10px; */
+                transition: background-color 1s ease-in-out, color 1s ease-in-out;
+                /* padding: 0px 20px; */
+                text-decoration: none;
+                align-items: center;
+                left: 0;
+                padding: 5px;
+                margin: 15px;
+            }
+
+                .menu a:hover {
+                    background-color: rgb(10, 10, 10);
+                    font-weight: bold;
+                    color: #f1e8f0;
+                }
+    </style>
+</body>
+</html>

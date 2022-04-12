@@ -1,0 +1,32 @@
+﻿@model IEnumerable<QuanLyCH.Models.TheLoai>
+
+
+
+
+<hr />
+<div class="dropdown a">
+    <h4 type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Loai San Pham &#9776;
+    </h4>
+   
+    <div class="dropdown-menu b" aria-labelledby="dropdownMenuButton" style-"text-align:left;">
+        @foreach (var item in Model)
+            {
+        <a href="@Url.Action("SPTheoLoai", "Giay", new { id = item.maloai })" class="dropdown-item" style="margin-left:5px; text-decoration:none; color:black;">
+            &#9830; @item.tenloai
+            <hr />
+        </a>
+            }
+    </div>
+</div>
+<hr />
+<style>
+    .a{
+        width:200px;
+    }
+    .a:hover .b {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+</style>

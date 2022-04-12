@@ -1,0 +1,8 @@
+﻿@using QuanLyCH.Models
+@{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+}
+<a class="getstarted scrollto active" href="@Url.Action("profile","NguoiDung",new {@id = kh.makh })" style="font-weight:bold;text-decoration:none">
+    Ten:@kh.hoten
+</a>
+

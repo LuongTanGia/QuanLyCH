@@ -1,0 +1,145 @@
+﻿@model IEnumerable<QuanLyCH.Models.GioHang>
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Đặt Hàng</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.magiay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tengiay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.giagiam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iSoluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dThanhtien)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.magiay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tengiay)
+            </td>
+            <td><img src="@item.hinh" width="200" /></td>
+            @using (Html.BeginForm("CapnhatGiohang", "Giohang", new { @id = item.magiay }))
+            {
+                <td>@String.Format("{0:0,0}", item.giagiam) VNĐ</td>
+                <td>@Html.DisplayFor(modelItem => item.iSoluong)</td>
+                <td>@Html.DisplayFor(modelItem => item.dThanhtien)</td>
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:right; color:red">
+        <td colspan="3">Số lượng giày: @ViewBag.Tongsoluong</td>
+        <td colspan="4">Số loại giày: @ViewBag.Tongsoluongsanpham</td>
+        <td colspan="5">
+            @if (ViewBag.TongTien <= 300000)
+            {
+            <p colspan="4">Tổng tiền:</p>
+            <p> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+            }
+            else
+            {
+            if (ViewBag.TongTien > 300000 && ViewBag.TongTien <= 1000000)
+            {
+            <p colspan="4">Tổng tiền:</p>
+            <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+            <p colspan="4">Giam Gia:</p>
+            <p> @String.Format("{0:0,0}", ViewBag.TienGiam1) vnd </p>
+            }
+            else
+            {
+            <p colspan="4">Tổng tiền:</p>
+            <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+            <p colspan="4">Giam Gia:</p>
+            <p> @String.Format("{0:0,0}", ViewBag.TienGiam2) vnd </p>
+            }
+
+            }
+        </td>
+    </tr>
+    <tr style="font-weight:bold; text-align:right">
+        <td colspan="6">
+            @Html.ActionLink("Trở về giỏ hàng", "Giohang", "GioHang")
+        </td>
+    </tr>
+</table>
+@using QuanLyCH.Models
+<h2 style="text-align:center">Thông tin đặt hàng</h2>
+@{
+    KhachHang kh = (KhachHang)Session["TaiKhoan"];
+}
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form">
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <p>Họ tên khách hàng: </p>
+                            <p style="font-weight:bold">@kh.hoten</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Ðịa chỉ: </p>
+                            <p style="font-weight:bold">@kh.diachi</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Điện thoại: </p>
+                            <p style="font-weight:bold">@kh.dienthoai</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <p>Email: </p>
+                            <p style="font-weight:bold">@kh.email</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Ngày đặt: </p>
+                            <p style="font-weight:bold">@DateTime.Now.ToShortDateString()</p>
+                        </div>
+                        <div class="form-group">
+                            <p>Ngày giao: </p>
+                            <p style-"font-weight:bold">
+                                <input type="date" name="NgayGiao" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div style="height:40px">
+                    <p></p>
+                    <p style="font-weight:bold">
+                        <a  value="Xác nhận" class="btn btn-success" href="@Url.Action("sendPass","NguoiDung")" src=" @Url.Action("XacnhanDonhang", "GioHang")" >Xac Nhan </a>
+                        <a href="@Url.Action("Payment","momo")">Thanh toán</a>
+                    </p>
+                </div>
+                <hr class="colorgraph">
+
+
+            </form>
+        </div>
+    }
+</div>

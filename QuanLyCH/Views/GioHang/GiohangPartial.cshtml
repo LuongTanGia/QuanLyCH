@@ -1,0 +1,19 @@
+﻿
+@using QuanLyCH.Models
+@{ 
+    List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
+
+}
+@if (Session["GioHang"] != null)
+{
+    <a class="getstarted scrollto active" href="@Url.Action("Giohang", "GioHang")" style="font-weight:bold;text-decoration:none">
+        Giỏ hàng (@lstGiohang.Count())
+
+    </a>
+}
+
+@*<a class="getstarted scrollto active" href="@Url.Action("Giohang","GioHang")" style="font-weight:bold;text-decoration:none">
+    Giỏ hàng (@ViewBag.Tongsoluongsanpham)
+</a>*@
+
+

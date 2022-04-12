@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QuanLyCH.Models.TheLoai>
+
+@{
+    ViewBag.Title = "ListGiay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin giày</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th> Mã loại </th>
+        <th> Tên giày</th>
+        <th> Hình </th>
+        <th> Giá bán</th>
+        <th> Ngày cập nhật </th>
+        <th> Số lượng tồn</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.maloai)</td>
+            <td>@Html.DisplayFor(modelItem => item.tenloai)</td>
+    @*        <td><img src="@item.hinh" width="250" height="250" alt="hinh thumbnail" /></td>
+            <td>@Html.DisplayFor(modelItem => item.giaban)</td>
+            <td>@Html.DisplayFor(modelItem => item.ngaycapnhat)</td>
+
+            14
+
+            <td>@Html.DisplayFor(modelItem => item.soluongton)</td>*@
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.magiay }) |
+                @Html.ActionLink("Detail", "Detail", new { id = item.magiay }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.magiay })
+            </td>*@
+        </tr>
+    }
+</table>

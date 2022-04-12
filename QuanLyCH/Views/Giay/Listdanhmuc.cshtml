@@ -1,0 +1,33 @@
+﻿@model IEnumerable<QuanLyCH.Models.TheLoai>
+
+@{
+    ViewBag.Title = "ListDanhMuc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông Tin Danh Muc</h2>
+<p>
+    @Html.ActionLink("Create New", "Creates")
+</p>
+<table class="table">
+    <tr>
+        <th> Mã loại </th>
+        <th> Tên Loai</th>
+        
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.maloai)</td>
+            <td>@Html.DisplayFor(modelItem => item.tenloai)</td>
+            
+
+
+            <td>
+                @Html.ActionLink("Edits", "Edits", new { id = item.maloai }) |
+                @Html.ActionLink("Deletes", "Deletes", new { id = item.maloai })
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,126 @@
+﻿@*@model QuanLyCH.Models.KhachHang
+
+    @{
+        ViewBag.Title = "DangNhap";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>DangNhap</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>KhachHang</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tendangnhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tendangnhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tendangnhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Dang Nhap" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index", "Home")
+    </div>
+*@
+@model QuanLyCH.Models.KhachHang
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @* <div class="form-horizontal">
+            <h4>Dang Nhap Thong Tin</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tendangnhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tendangnhap, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tendangnhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.matkhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="DangNhap" class="btn btn-info" />
+                </div>
+            </div>
+        </div>*@
+
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form role="form">
+                <h2>Dang Nhap <small>Ban can phai dang nhap vao trang web.</small></h2>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.tendangnhap, new { htmlAttributes = new { @class = "form-control", placeholder = "Ten Dang Nhap" } })
+                            @Html.ValidationMessageFor(model => model.tendangnhap, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.matkhau, new { htmlAttributes = new { @class = "form-control", Type = "password", placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <div class="col-xs-8 col-sm-9 col-md-9">
+                                <input type="submit" value="DangNhap" class="btn btn-info" style="width:100%;" />
+                            </div>
+                        </div>
+                        <div>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
