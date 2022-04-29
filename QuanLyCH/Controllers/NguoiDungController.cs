@@ -197,7 +197,7 @@ namespace QuanLyCH.Controllers
 
 
 
-        public void sendPass(string pass , System.Web.Mvc.FormCollection collection)
+       /* public void sendPass(string pass , System.Web.Mvc.FormCollection collection )
 
         {
             DonHang dh = new DonHang();
@@ -268,13 +268,15 @@ namespace QuanLyCH.Controllers
             {
 
                 smtp.Send(message);
-                XacnhanDonhang();
 
+
+                url = "https://localhost:44391/momo/ConfirmPaymentClient";
+
+                
             }
-            
+             
 
-            
-        }
+        }*/
         public ActionResult XacnhanDonhang()
         {
             return RedirectToAction("XacnhanDonhang", "GioHang");

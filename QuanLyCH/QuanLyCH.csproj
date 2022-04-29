@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="common\MailHelper.cs" />
     <Compile Include="Controllers\GiayController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2206,6 +2207,7 @@
     <Content Include="Content\images\sv3.jpg" />
     <Content Include="Content\images\The Shop.png" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\template\neworder.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2298,7 +2300,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\GioHang\Giohang.cshtml" />
     <Content Include="Views\GioHang\DatHang.cshtml" />
-    <Content Include="Views\GioHang\XacnhanDonhang.cshtml" />
     <Content Include="Views\Giay\Create.cshtml" />
     <Content Include="Views\Giay\Detail.cshtml" />
     <Content Include="Views\Giay\Edit.cshtml" />
@@ -2321,10 +2322,11 @@
     <Content Include="Views\Giay\Deletes.cshtml" />
     <Content Include="Views\NguoiDung\profile.cshtml" />
     <Content Include="Views\NguoiDung\sendPass.cshtml" />
+    <Content Include="Views\momo\ConfirmPaymentClient.cshtml" />
+    <Content Include="Views\GioHang\XacnhanDonhang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\momo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

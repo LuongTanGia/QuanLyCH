@@ -1,10 +1,29 @@
 ﻿@model IEnumerable<QuanLyCH.Models.GioHang>
 
+@using QuanLyCH.Models
+@{
+    List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
 
+}
+
+@*<a class="getstarted scrollto active" href="@Url.Action("Giohang", "GioHang")" style="font-weight:bold;text-decoration:none">
+    <sup>
+        @if (Session["GioHang"] != null)
+        {
+            @lstGiohang.Count()}
+    </sup>
+
+
+
+</a>*@
 
 
 <div class="aa">
-    <a><i class="fa-solid fa-cart-shopping" style="color:#ffffff"></i></a>
+    <a href="@Url.Action("Giohang", "GioHang")"><i class="fa-solid fa-cart-shopping" style="color:#ffffff;"></i><sup style="color: #ff0000; font-size: 15px; top: -13px; background: #222222; border-radius: 50%">
+    @if (Session["GioHang"] != null)
+    {
+        @lstGiohang.Count()}
+</sup> </a>
     <div style="width: 550px; z-index: 100; background:white; position: absolute;" class="bb">
         <p style="text-align:center;">GioHangMiNi</p>
         <table class="table">
@@ -33,7 +52,7 @@
         </table>
         <div style="text-align:center; margin-bottom:5px;">
 
-        <a value="Xác nhận" class="btn btn-success" href="@Url.Action("Giohang", "GioHang")" style="align-items:center">Xem Gio Hang </a>
+            <a value="Xác nhận" class="btn btn-success" href="@Url.Action("Giohang", "GioHang")" style="align-items:center">Xem Gio Hang </a>
         </div>
 
     </div>
@@ -71,14 +90,11 @@
     .aa:hover .bb {
         display: block;
     }
+
     .bb {
-       display: none;
+        display: none;
         margin-top: 5px;
         border-radius: 20px;
         border: 1px solid #000000;
     }
-   
-    
-
-    
 </style>

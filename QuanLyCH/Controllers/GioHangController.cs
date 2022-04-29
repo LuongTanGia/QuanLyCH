@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QuanLyCH.common;
 using QuanLyCH.Models;
 namespace QuanLyCH.Controllers
 {
@@ -59,13 +61,28 @@ namespace QuanLyCH.Controllers
        
         private double TongTien()
         {
-            double tt = 0; 
+            double tt = 0;
             List<GioHang> lstGiohang = Session["GioHang"] as List<GioHang>;
             if (lstGiohang != null)
             {
                 tt = lstGiohang.Sum(n => n.dThanhtien);
             }
-            return tt;
+
+            if (tt <= 300000)
+            {
+                return tt;
+            }
+            else
+            {
+                if (tt > 300000 && tt <= 1000000)
+                {
+                    return tt * 0.7;
+                }
+                else
+                {
+                    return tt * 0.5;
+                }
+            }
 
 
         }
@@ -162,6 +179,8 @@ namespace QuanLyCH.Controllers
             dh.thanhtoan = false;
             data.DonHangs.InsertOnSubmit(dh);
             data.SubmitChanges();
+            double tong = 0;
+            
             foreach (var item in gh)
             {
                 ChiTietDonHang ctdh = new ChiTietDonHang();
@@ -171,11 +190,26 @@ namespace QuanLyCH.Controllers
                 ctdh.gia = (decimal)item.giagiam;
                 s = data.Giays.Single(n => n.magiay == item.magiay);
                 s.soluongton -= ctdh.soluong;
+                tong += item.dThanhtien;
                 data.SubmitChanges();
                 data.ChiTietDonHangs.InsertOnSubmit(ctdh);
             }
+            string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/neworder.html"));
+
+            content = content.Replace("{{CustomerName}}", dh.KhachHang.hoten);
+            content = content.Replace("{{Phone}}", dh.KhachHang.dienthoai);
+            content = content.Replace("{{Email}}", dh.KhachHang.email);
+            content = content.Replace("{{Address}}", dh.KhachHang.diachi);
+            content = content.Replace("{{Total}}", TongTien().ToString("N0"));
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+
+            new MailHelper().SendMail(dh.KhachHang.email, "Đơn hàng mới từ cửa hàng giày GDNC", content);
+            new MailHelper().SendMail(toEmail, "Đơn hàng", content);
+
             data.SubmitChanges();
             Session["Giohang"] = null;
+
             return RedirectToAction("XacnhanDonhang", "GioHang");
         }
         
@@ -193,7 +227,7 @@ namespace QuanLyCH.Controllers
         }*/
         public ActionResult XacnhanDonhang()
         {
-            return View();
+            return PartialView();
         }
         public ActionResult XacNhanAdmin()
         {

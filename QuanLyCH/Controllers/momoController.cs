@@ -52,7 +52,7 @@ namespace QuanLyCH.Controllers
             string accessKey = "ZDGSupuduoz2daiM";
             string serectkey = "A8yqrttIh1CPpm9gwVn4ovYYkBjbNkdZ";
             string orderInfo = kh.hoten.ToString();
-            string returnUrl = "https://localhost:44394/Home/ConfirmPaymentClient";
+            string returnUrl = "https://localhost:44391/momo/ConfirmPaymentClient";
             string notifyurl = "http://ba1adf48beba.ngrok.io/Home/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
             string amount = TongTien().ToString();
